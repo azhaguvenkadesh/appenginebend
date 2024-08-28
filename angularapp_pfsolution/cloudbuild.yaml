@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gsutil -m rsync -r dist/ gs://dr-pt-fend-bucket
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: ['gsutil', 'web', 'set', '-m', 'index.html', '-e', '404.html', 'gs://dr-pt-fend-bucket']
